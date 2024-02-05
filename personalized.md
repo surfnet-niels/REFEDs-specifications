@@ -145,7 +145,7 @@ Service Providers SHOULD rely on the bundle of attributes defined in Section 5, 
 A common example would be a requirement for indicating authorization to access a service (see Section 6).
 
 A Service Provider that conforms to this entity category would exhibit the following entity attribute in SAML metadata:
-
+```
 <mdattr:EntityAttributes xmlns:mdattr="urn:oasis:names:tc:SAML:metadata:attribute">
    <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
       NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
@@ -153,15 +153,17 @@ A Service Provider that conforms to this entity category would exhibit the follo
    <saml:AttributeValue>https://refeds.org/category/personalized</saml:AttributeValue>
    </saml:Attribute>
 </mdattr:EntityAttributes>
+```
 
-**8\. Deployment Guidance for Identity Providers  
-**
+
+
+**8\. Deployment Guidance for Identity Providers**
 -----------------------------------------------------
 
 An Identity Provider indicates support for this entity category by exhibiting the entity attribute in its metadata. Such an Identity Provider MUST, for a significant subset of its user population, release all required attributes in the bundle defined in Section 5 to all tagged Service Providers, either automatically or subject to user consent or notification, without administrative involvement by any party.
 
 An Identity Provider that supports this entity category would exhibit the following entity attribute in SAML metadata:
-
+```
 <mdattr:EntityAttributes xmlns:mdattr="urn:oasis:names:tc:SAML:metadata:attribute">
   <saml:Attribute
      xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
@@ -170,7 +172,7 @@ An Identity Provider that supports this entity category would exhibit the follow
   <saml:AttributeValue>https://refeds.org/category/personalized</saml:AttributeValue>
   </saml:Attribute>
 </mdattr:EntityAttributes>
-
+```
 **9\. References**
 ------------------
 
