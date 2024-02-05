@@ -47,7 +47,7 @@ Identity Providers may indicate support for this Entity Category to facilitate d
 
 The following URI is used as the attribute value for the Entity Category and Entity Category Support attribute:
 
-https://refeds.org/category/anonymous
+    https://refeds.org/category/anonymous
 
 **3\. Semantics**
 ------------------
