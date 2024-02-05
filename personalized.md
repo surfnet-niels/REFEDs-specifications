@@ -23,8 +23,7 @@ This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 Inter
 
 [https://wiki.refeds.org/x/aQA2B](https://wiki.refeds.org/x/aQA2B)
 
-**Overview**
-------------
+### Overview
 
 Research and Education Federations are invited to use the REFEDS Personalized Access Entity Category with their members to support the release of attributes to Service Providers meeting the requirements described below.
 
@@ -43,15 +42,15 @@ None of the attributes in this entity category are specifically intended to prov
 
 Identity Providers may indicate support for this Entity Category to facilitate discovery and improve the user experience at Service Providers. Self-assertion is the typical approach used but this is not the only acceptable method.
 
-****2\. Syntax****
-------------------
+**2\. Syntax**
+--------------
 
 The following URI is used as the attribute value for the Entity Category and Entity Category Support attribute:
 
 [https://refeds.org/category/personalized](https://refeds.org/category/personalized)
 
-****3\. Semantics****
----------------------
+**3\. Semantics**
+-----------------
 
 By asserting a Service Provider to be a member of this Entity Category, a federation registrar claims that:
 
@@ -82,7 +81,7 @@ The mechanism by which this entity category provides for consistent attribute re
 
 The use of the <md:RequestedAttribute> mechanism supported by SAML metadata is outside the scope of this category, and may co-exist with it in deployments as desired, subject to this specification’s requirements being met.
 
-### 5.1 Required Attributes
+#### 5.1 Required Attributes
 
 The _entity category attribute bundle_ consists (abstractly) of the following data elements:
 
@@ -101,7 +100,7 @@ With regard to assurance, the REFEDS Assurance Framework \[RAF\] is REQUIRED as 
 
 Identity Providers are not expected or required to alter their business processes or to provide any particular assurance level for their subjects, but rather are required to communicate what they do provide, or other applicable information as appropriate.
 
-### 5.1.1 SAML 2.0
+##### 5.1.1 SAML 2.0
 
 When SAML 2.0 is used, the following SAML Attributes make up the required attribute set defined abstractly above. In all cases, the defined NameFormat is urn:oasis:names:tc:SAML:2.0:attrname-format:uri
 
@@ -137,8 +136,8 @@ None of the attributes defined in Section 5 are suitable for accurately signalli
 
 A companion document discussing the federated authorization problem and suggested practices can be found at \[FederatedAuthorization\].
 
-**7\.** **Deployment Guidance for Service Providers**
------------------------------------------------------
+**7\. Deployment Guidance for Service Providers**
+-------------------------------------------------
 
 Service Providers SHOULD rely on the bundle of attributes defined in Section 5, but MAY ask for, or even require, other information as needed for additional purposes, via mechanisms that are outside the scope of this specification.
 
@@ -158,7 +157,7 @@ A Service Provider that conforms to this entity category would exhibit the follo
 
 
 **8\. Deployment Guidance for Identity Providers**
------------------------------------------------------
+--------------------------------------------------
 
 An Identity Provider indicates support for this entity category by exhibiting the entity attribute in its metadata. Such an Identity Provider MUST, for a significant subset of its user population, release all required attributes in the bundle defined in Section 5 to all tagged Service Providers, either automatically or subject to user consent or notification, without administrative involvement by any party.
 
