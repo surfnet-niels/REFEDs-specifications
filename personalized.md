@@ -1,4 +1,4 @@
-Personalized Access Entity Category
+Personalized Access Entity Label
 -----------------------------------
 
 **Version History**
@@ -39,9 +39,9 @@ An FAQ for the Entity Category has been made available to help deployments \[FAQ
 
 Candidates for the Personalized Entity Category are Services that have a proven need to receive a small set of personally identifiable information about their users in order to effectively provide their service to the user or to enable the user to signal their identity to other users within the service. The Service must be able to effectively demonstrate this need to the entity issueing the identifier for the Personalized Entity Category and demonstrate their compliance with regulatory requirements concerning personal data through a published Privacy Notice.
 
-None of the attributes in this entity category are specifically intended to provide authorization information. See section 6 for a discussion of this use case.
+None of the attributes are specifically intended to provide authorization information. See section 6 for a discussion of this use case.
 
-Identity Providers may indicate support for this Entity Category to facilitate discovery and improve the user experience at Service Providers. Self-assertion is the typical approach used but this is not the only acceptable method.
+Depending on the implementation protocol used requirements may exist for the entity releasing the attributes towards the Services
 
 **2\. Syntax**
 --------------
@@ -104,6 +104,8 @@ Identity Providers are not expected or required to alter their business processe
 ##### 5.1.1 SAML 2.0
 
 This definition is written in compliance with the Entity Category SAML Entity Metadata Attribute Types specification \[RFC8409\];
+
+Identity Providers may indicate support for this Entity Category to facilitate discovery and improve the user experience at Service Providers. Self-assertion is the typical approach used but this is not the only acceptable method.
 
 When SAML 2.0 is used, the following SAML Attributes make up the required attribute set defined abstractly above. In all cases, the defined NameFormat is urn:oasis:names:tc:SAML:2.0:attrname-format:uri
 
