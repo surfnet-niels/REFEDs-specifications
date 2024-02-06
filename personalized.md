@@ -4,8 +4,8 @@ Personalized Access Entity Label
 **Version History**
 
 [v.1 published 30th November 2021](https://zenodo.org/record/5741746)  
-v.2 published 13th February 2023 (this version)
-v3. published XYZ
+[v.2 published 13th February 2023](https://zenodo.org/record/7684449) 
+v3. published XYZ (this version)
 
 **Reference pdf**
 
