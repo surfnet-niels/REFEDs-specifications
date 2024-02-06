@@ -26,7 +26,7 @@ This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 Inter
 
 ### Overview
 
-Research and Education Federations are invited to use the REFEDS Personalized Access Entity Category with their members to support the release of attributes to Service Providers meeting the requirements described below.
+Research and Education Federations are invited to use the REFEDS Personalized Access Entity Label with their members to support the release of attributes to Service Providers meeting the requirements described below.
 
 The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in RFC 2119 \[BCP14\].
 
@@ -37,16 +37,14 @@ An FAQ for the Entity Category has been made available to help deployments \[FAQ
 **1\. Definition**
 ------------------
 
-Candidates for the Personalized Entity Category are Services that have a proven need to receive a small set of personally identifiable information about their users in order to effectively provide their service to the user or to enable the user to signal their identity to other users within the service. The Service must be able to effectively demonstrate this need to the entity issueing the identifier for the Personalized Entity Category and demonstrate their compliance with regulatory requirements concerning personal data through a published Privacy Notice.
-
+Candidates for the Personalized Access Entity Label are Services that have a proven need to receive a small set of personally identifiable information about their users in order to effectively provide their service to the user or to enable the user to signal their identity to other users within the service. The Service must be able to effectively demonstrate this need to the entity issueing the identifier for the label and demonstrate their compliance with regulatory requirements concerning personal data through a published Privacy Notice.
 None of the attributes are specifically intended to provide authorization information. See section 6 for a discussion of this use case.
-
-Depending on the implementation protocol used requirements may exist for the entity releasing the attributes towards the Services
+Depending on the implementation protocol used requirements may exist for the entity releasing the attributes towards the Services. See section 5 for a discussion og these cases.
 
 **2\. Syntax**
 --------------
 
-The following URI is used as the attribute value for the Entity Category and Entity Category Support attribute:
+The following URI is used as the identifier for the entity label:
 
     https://refeds.org/category/personalized
 
@@ -56,7 +54,7 @@ The following URI is used as the attribute value for the Entity Category and Ent
 By asserting a Service Provider to be a member of this Entity Category, a federation registrar claims that:
 
 *   (SE1) The Service Provider requested assignment of the Category and complies with this entity category’s registration criteria.
-*   (SE2) The Service Provider’s request to be assigned the Personalized Access Entity Category has been reviewed against the provided REFEDS \[Guidelines\] and approved by the federation registrar.
+*   (SE2) The Service Provider’s request to be assigned the Personalized Access Entity Label has been reviewed against the provided REFEDS \[Guidelines\] and approved by the federation registrar.
 
 By registering for this Entity Category, a Service Provider has agreed to the registration criteria as defined in Section 4.
 
@@ -101,11 +99,16 @@ With regard to assurance, the REFEDS Assurance Framework \[RAF\] is REQUIRED as 
 
 Identity Providers are not expected or required to alter their business processes or to provide any particular assurance level for their subjects, but rather are required to communicate what they do provide, or other applicable information as appropriate.
 
-##### 5.1.1 SAML 2.0
+**6\. Protocol specific implmenentation**
+------------------------
 
-This definition is written in compliance with the Entity Category SAML Entity Metadata Attribute Types specification \[RFC8409\];
+##### 6.1 SAML 2.0
+------------------
 
-Identity Providers may indicate support for this Entity Category to facilitate discovery and improve the user experience at Service Providers. Self-assertion is the typical approach used but this is not the only acceptable method.
+###### 6.1.1 Entity Category
+To signal compliance when using SAML 2.0, the label is to be used Entity Category and Entity Category Support attribute. This definition is written in compliance with the Entity Category SAML Entity Metadata Attribute Types specification \[RFC8409\];
+
+###### 6.1.2 Attribute set
 
 When SAML 2.0 is used, the following SAML Attributes make up the required attribute set defined abstractly above. In all cases, the defined NameFormat is urn:oasis:names:tc:SAML:2.0:attrname-format:uri
 
@@ -133,16 +136,9 @@ When SAML 2.0 is used, the following SAML Attributes make up the required attrib
         *   Attribute Name: urn:oid:1.3.6.1.4.1.5923.1.1.1.11
 
 The specific naming and format of the attributes above is guided by the \[SAMLAttr\] and \[SAMLSubId\] profiles.
+Identity Providers may indicate support for this Entity Category to facilitate discovery and improve the user experience at Service Providers. Self-assertion is the typical approach used but this is not the only acceptable method.
 
-**6\. Authorization**
----------------------
-
-None of the attributes defined in Section 5 are suitable for accurately signalling access authorization; signalling authorization is out of scope for this entity category. While they are often used as approximations, this inevitably denies access to authorized users and permits access to unauthorized users.
-
-A companion document discussing the federated authorization problem and suggested practices can be found at \[FederatedAuthorization\].
-
-**7\. Deployment Guidance for Service Providers**
--------------------------------------------------
+###### 6.1.3\. Deployment Guidance for Service Providers
 
 Service Providers SHOULD rely on the bundle of attributes defined in Section 5, but MAY ask for, or even require, other information as needed for additional purposes, via mechanisms that are outside the scope of this specification.
 
@@ -159,10 +155,7 @@ A Service Provider that conforms to this entity category would exhibit the follo
 </mdattr:EntityAttributes>
 ```
 
-
-
-**8\. Deployment Guidance for Identity Providers**
---------------------------------------------------
+###### 6.1.4\. Deployment Guidance for Identity Providers
 
 An Identity Provider indicates support for this entity category by exhibiting the entity attribute in its metadata. Such an Identity Provider MUST, for a significant subset of its user population, release all required attributes in the bundle defined in Section 5 to all tagged Service Providers, either automatically or subject to user consent or notification, without administrative involvement by any party.
 
@@ -177,6 +170,31 @@ An Identity Provider that supports this entity category would exhibit the follow
   </saml:Attribute>
 </mdattr:EntityAttributes>
 ```
+
+
+##### 6.2 OpenIDConect and OpenID Federation
+--------------------------------------------
+
+###### 6.2.1 Trustmark
+Describe how the trustmark is used
+
+###### 6.1.2 Attribute set
+Describe how in OIDC we use a scope(?)
+
+###### 6.1.3\. Deployment Guidance for Relying Parties
+
+
+###### 6.1.4\. Deployment Guidance for OpenID Providers
+
+
+**7\. Authorization**
+---------------------
+
+None of the attributes defined in Section 5 are suitable for accurately signalling access authorization; signalling authorization is out of scope for this entity category. While they are often used as approximations, this inevitably denies access to authorized users and permits access to unauthorized users.
+
+A companion document discussing the federated authorization problem and suggested practices can be found at \[FederatedAuthorization\].
+
+
 **9\. References**
 ------------------
 
