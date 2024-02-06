@@ -5,6 +5,7 @@ Personalized Access Entity Category
 
 [v.1 published 30th November 2021](https://zenodo.org/record/5741746)  
 v.2 published 13th February 2023 (this version)
+v3. published XYZ
 
 **Reference pdf**
 
@@ -29,14 +30,14 @@ Research and Education Federations are invited to use the REFEDS Personalized Ac
 
 The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in RFC 2119 \[BCP14\].
 
-This definition is written in compliance with the Entity Category SAML Entity Metadata Attribute Types specification \[RFC8409\]; this specification may be extended to reference other protocol-specific formulations as circumstances warrant.
+This specification may be extended to reference other protocol-specific formulations as circumstances warrant.
 
 An FAQ for the Entity Category has been made available to help deployments \[FAQ\].
 
 **1\. Definition**
 ------------------
 
-Candidates for the Personalized Entity Category are Service Providers that have a proven need to receive a small set of personally identifiable information about their users in order to effectively provide their service to the user or to enable the user to signal their identity to other users within the service. The Service Provider must be able to effectively demonstrate this need to their federation registrar (normally the Service Provider’s home federation) and demonstrate their compliance with regulatory requirements concerning personal data through a published Privacy Notice.
+Candidates for the Personalized Entity Category are Services that have a proven need to receive a small set of personally identifiable information about their users in order to effectively provide their service to the user or to enable the user to signal their identity to other users within the service. The Service must be able to effectively demonstrate this need to the entity issueing the identifier for the Personalized Entity Category and demonstrate their compliance with regulatory requirements concerning personal data through a published Privacy Notice.
 
 None of the attributes in this entity category are specifically intended to provide authorization information. See section 6 for a discussion of this use case.
 
@@ -101,6 +102,8 @@ With regard to assurance, the REFEDS Assurance Framework \[RAF\] is REQUIRED as 
 Identity Providers are not expected or required to alter their business processes or to provide any particular assurance level for their subjects, but rather are required to communicate what they do provide, or other applicable information as appropriate.
 
 ##### 5.1.1 SAML 2.0
+
+This definition is written in compliance with the Entity Category SAML Entity Metadata Attribute Types specification \[RFC8409\];
 
 When SAML 2.0 is used, the following SAML Attributes make up the required attribute set defined abstractly above. In all cases, the defined NameFormat is urn:oasis:names:tc:SAML:2.0:attrname-format:uri
 
