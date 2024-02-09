@@ -176,7 +176,20 @@ An Identity Provider that supports this entity category would exhibit the follow
 --------------------------------------------
 
 ###### 6.2.1 Trustmark
-Describe how the trustmark is used
+The Personalized Access Label has different semantics when it comes to identity sources and services that are consuming identity information.
+In the case of a service, a need must be confirmed for the personalized data, so that excessive or uncesessary personal data transfer can be prevented. This may be done for instance by a federation registrar. The services should not self-assert such a label.
+
+In case of an identity source, the source itself may signal its capability and willingness to release personal data. Since they are data controllers for their users, they may decide this internally. Therefore, personalized access release capability may be self-asserted. 
+
+In OpenID Connect Relying Parties (RP) are the data consumers and OpenID Providers (OP) are the data providers.
+
+RPs can be holders of "Personalized Access RP" trust marks, which MUST not be self-asserted. They need to be issued by a trustmark issuer defined by the trust anchor according to OpenID Federation specifications. If a trustmark issuer issues this trust mark it MUST (SHOULD?) establish a mechanism to verify that the OP indeed has this capability.
+
+OPs can be holders of "Personalized Access OP" trust marks, which MAY be self asserted or MAY be issued by a trustmark issuer defined by the trust anchor according to OpenID Federation specifications. If a trustmark issuer issues this trust mark it MAY establish a mechanism to verify that the OP indeed has this capability.
+
+In order for an OP to release data to an RP according to the Personalized Access mechanism, it MUST establish a trust chain from the RP to the trust anchor and it MUST verify the Personalized Access RP trust mark. Both the establishment of the trust chain and the trust mark verification MUST be done according to the OpenID Federation specification. This check MUST be done periodically and MAY be done before each transaction.
+
+RPs MAY rely on "Personalized Access OP" trust mark for discovery purposes.
 
 ###### 6.1.2 Attribute set
 Describe how in OIDC we use a scope(?)
