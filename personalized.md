@@ -30,9 +30,9 @@ Research and Education Federations are invited to use the REFEDS Personalized Ac
 
 The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in RFC 2119 \[BCP14\].
 
-This specification may be extended to reference other protocol-specific formulations as circumstances warrant.
+This specification includes reference to protocol-specific formulations as circumstances warrant in Chapter 6
 
-An FAQ for the Entity Category has been made available to help deployments \[FAQ\].
+An FAQ for the Entity Label has been made available to help deployments \[FAQ\].
 
 **1\. Definition**
 ------------------
@@ -51,38 +51,41 @@ The following URI is used as the identifier for the entity label:
 **3\. Semantics**
 -----------------
 
-By asserting a Service Provider to be a member of this Entity Category, a federation registrar claims that:
+By asserting a Service Provider to be a member of this Entity Label, a federation registrar claims that:
 
-*   (SE1) The Service Provider requested assignment of the Category and complies with this entity category’s registration criteria.
+*   (SE1) The Service Provider requested assignment of the label and complies with this entity label’s registration criteria.
 *   (SE2) The Service Provider’s request to be assigned the Personalized Access Entity Label has been reviewed against the provided REFEDS \[Guidelines\] and approved by the federation registrar.
 
-By registering for this Entity Category, a Service Provider has agreed to the registration criteria as defined in Section 4.
+By registering for this Entity Label, a Service Provider has agreed to the registration criteria as defined in Section 4.
 
-By asserting support for this Entity Category, Identity Providers are indicating that they will release attributes to Service Providers that also assert this category.
+~~By asserting support for this Entity Label, Identity Providers are indicating that they will release attributes to Service Providers that also assert this category.~~
 
 **4\. Registration Criteria**
 -----------------------------
 
-When a Service Provider’s federation registers the Service Provider in the Entity Category, the federation registrar MUST perform at least the following checks:
+When a Service Provider’s federation registers the Service in the Entity Label, the federation registrar MUST perform at least the following checks:
 
-*   (RC1) The service has a proven and documented need for the personally identifiable information that forms the attribute bundle for this entity category.
-*   (RC2) The Service Provider has committed to data minimisation and will not use the attributes for purposes other than as described in their request.
+*   (RC1) The service has a proven and documented need for the personally identifiable information that forms the attribute bundle for this entity label.
+*   (RC2) The Service has committed to data minimisation and will not use the attributes for purposes other than as described in their request.
 *   (RC3) Ensure that the service meets the following technical requirements:
-    *   (RC3.1) The Service Provider provides an <mdui:DisplayName>, <mdui:InformationURL>, and <mdui:PrivacyStatementURL> in metadata. Including an English language version (i.e., xml:lang=”en”) is RECOMMENDED.
-    *   (RC3.2) The Service Provider provides one or more contacts in metadata.
+    *   ~~(RC3.1) The Service Provider provides an <mdui:DisplayName>, <mdui:InformationURL>, and <mdui:PrivacyStatementURL> in metadata. Including an English language version (i.e., xml:lang=”en”) is RECOMMENDED.~~
+    *   (RC3.1) To support enduser facing intercaes, the Service provides a descriptive name of the service, an information URL which points to a web page where you may further elaborate details about your service or organization and an URL points to a web page containing your service (organization)'s user privacy and data protection statement. Including an English language version (i.e., xml:lang=”en”) is RECOMMENDED.
+    *   (RC3.2) The Service provides one or more contacts in metadata.
+    The techical implementation for these criteria depend on the specific protocol used and are described in Chapter 6.
 
-These are the requirements to assert this entity category; any change MUST be reported by the Service Provider to the federation registrar. The federation registrar MUST remove the Entity Category if the Service Provider indicates a change in conformance. The federation registrar MUST have other remediation procedures to address a lack of compliance with these requirements.
+These are the requirements to assert this entity label; any change MUST be reported by the Service to the federation registrar. The federation registrar MUST remove the Entity Label if the Service indicates a change in conformance. The federation registrar MUST have other remediation procedures to address a lack of compliance with these requirements.
 
 **5\. Attribute Bundle**
 ------------------------
 
-The mechanism by which this entity category provides for consistent attribute release is through the definition of a set of commonly supported and consumed attributes. The attributes chosen represent a privacy baseline such that further minimization achieves no particular benefit for applicable services. Thus, the minimal disclosure principle is designed into the category.
+The mechanism by which this entity label provides for consistent attribute release is through the definition of a set of commonly supported and consumed attributes. The attributes chosen represent a privacy baseline such that further minimization achieves no particular benefit for applicable services. Thus, the minimal disclosure principle is designed into the label.
 
 The use of the <md:RequestedAttribute> mechanism supported by SAML metadata is outside the scope of this category, and may co-exist with it in deployments as desired, subject to this specification’s requirements being met.
+==Do we have a similar ptoblem with OIDC?==
 
 #### 5.1 Required Attributes
 
-The _entity category attribute bundle_ consists (abstractly) of the following data elements:
+The _entity label attribute bundle_ consists (abstractly) of the following data elements:
 
 *   _organization_
 *   _user identifier_
@@ -95,7 +98,7 @@ These abstract elements are bound to protocol-specific definitions in the follow
 
 It is understood that not every subject can necessarily be associated with values for every attribute. For example, some users may have no formal affiliation with the issuing organization. In such cases, it is expected that those attribute(s) may not be provided. The designation that all these attributes are required is a general obligation and not specific to a given subject.
 
-With regard to assurance, the REFEDS Assurance Framework \[RAF\] is REQUIRED as a source of values, but other frameworks and their values are permitted. The requirement to support the REFEDS Assurance Framework implies that at least one value, ‘[https://refeds.org/assurance](https://refeds.org/assurance)‘ MUST be supplied, but no others are specifically required unless the IdP deems them to be applicable.
+With regard to assurance, the REFEDS Assurance Framework \[RAF\] is REQUIRED as a source of values, but other frameworks and their values are permitted. The requirement to support the REFEDS Assurance Framework implies that at least one value, ‘[https://refeds.org/assurance](https://refeds.org/assurance)‘ MUST be supplied, ==but no others are specifically required unless the IdP deems them to be applicable.==
 
 Identity Providers are not expected or required to alter their business processes or to provide any particular assurance level for their subjects, but rather are required to communicate what they do provide, or other applicable information as appropriate.
 
@@ -106,11 +109,17 @@ Identity Providers are not expected or required to alter their business processe
 ------------------
 
 ###### 6.1.1 Entity Category
-To signal compliance when using SAML 2.0, the label is to be used Entity Category and Entity Category Support attribute. This definition is written in compliance with the Entity Category SAML Entity Metadata Attribute Types specification \[RFC8409\];
+To signal compliance when using SAML 2.0, the label is to be used as an Entity Category and Entity Category Support attribute. This definition is written in compliance with the Entity Category SAML Entity Metadata Attribute Types specification \[RFC8409\];
 
-###### 6.1.2 Attribute set
+###### 6.1.2 Implementing the Registration Criteria
+To technically implement the registration criteria as describe in Chapter 4 the Service should:
+*   (RC3.1)  The Service Provider provides an <mdui:DisplayName>, <mdui:InformationURL>, and <mdui:PrivacyStatementURL> in metadata. 
+Including an English language version (i.e., xml:lang=”en”) is RECOMMENDED.
+*   (RC3.2) The Service provides one or more contacts in metadata.
 
-When SAML 2.0 is used, the following SAML Attributes make up the required attribute set defined abstractly above. In all cases, the defined NameFormat is urn:oasis:names:tc:SAML:2.0:attrname-format:uri
+###### 6.1.3 Attribute set
+
+The following SAML Attributes make up the required attribute set defined abstractly above. In all cases, the defined NameFormat is urn:oasis:names:tc:SAML:2.0:attrname-format:uri
 
 *   _organization_ is defined to be:
     *   schacHomeOrganization \[SCHAC\]
@@ -138,11 +147,11 @@ When SAML 2.0 is used, the following SAML Attributes make up the required attrib
 The specific naming and format of the attributes above is guided by the \[SAMLAttr\] and \[SAMLSubId\] profiles.
 Identity Providers may indicate support for this Entity Category to facilitate discovery and improve the user experience at Service Providers. Self-assertion is the typical approach used but this is not the only acceptable method.
 
-###### 6.1.3\. Deployment Guidance for Service Providers
+###### 6.1.4\. Deployment Guidance for Service Providers
 
-Service Providers SHOULD rely on the bundle of attributes defined in Section 5, but MAY ask for, or even require, other information as needed for additional purposes, via mechanisms that are outside the scope of this specification.
+Service Providers SHOULD rely on the bundle of attributes defined in Section 5 and 6.1.3, but MAY ask for, or even require, other information as needed for additional purposes, via mechanisms that are outside the scope of this specification.
 
-A common example would be a requirement for indicating authorization to access a service (see Section 6).
+A common example would be a requirement for indicating authorization to access a service (see Section 7).
 
 A Service Provider that conforms to this entity category would exhibit the following entity attribute in SAML metadata:
 ```
@@ -155,7 +164,7 @@ A Service Provider that conforms to this entity category would exhibit the follo
 </mdattr:EntityAttributes>
 ```
 
-###### 6.1.4\. Deployment Guidance for Identity Providers
+###### 6.1.5\. Deployment Guidance for Identity Providers
 
 An Identity Provider indicates support for this entity category by exhibiting the entity attribute in its metadata. Such an Identity Provider MUST, for a significant subset of its user population, release all required attributes in the bundle defined in Section 5 to all tagged Service Providers, either automatically or subject to user consent or notification, without administrative involvement by any party.
 
@@ -172,20 +181,30 @@ An Identity Provider that supports this entity category would exhibit the follow
 ```
 
 
-##### 6.2 OpenIDConect and OpenID Federation
+##### 6.2 OpenIDConnect and OpenID Federation
 --------------------------------------------
 
 ###### 6.2.1 Trustmark
-Describe how the trustmark is used
+To signal compliance when using OIDC and OpenID Federation the label is to be used as a Trustmark [Trustmark]. This definition is written in compliance with the Trustmark specification as described in the OpenID Federation specification \[OpenID Federation specification\];
 
-###### 6.1.2 Attribute set
+###### 6.1.2 Implementing the Registration Criteria
+The metadata requirements for impementing the registration criteria follow the OpenID Connect Dynamic Client Registration [OpenID Connect Dynamic Client Registration]
+To implement the registration criteria as describe in Chapter 4 the Service should:
+*   (RC3.1)  The Service provides an client_name, client_uri, and policy_uri in metadata. Including an English language version in accordance with the Metadata Languages and Scripts section 2.1 [Metadata Languages and Scripts] is RECOMMENDED.
+*   (RC3.2) The Service provides one or more contacts in metadata, using the contacts parameter
+== ToDo: This does not align well with the current best pratice in SAML to have a clear seperation of concerns (admin/technical/helpdesk/security) ==
+
+###### 6.1.3 Attribute set
 Describe how in OIDC we use a scope(?)
 
-###### 6.1.3\. Deployment Guidance for Relying Parties
 
+[White Paper for implementation of mappings between SAML 2.0 and OpenID Connect in Research and Education][https://docs.google.com/document/d/1b-Mlet3Lq7qKLEf1BnHJ4nL1fq-vMe7fzpXyrq2wp08/edit#heading=h.c4ib3eojk7el]
 
-###### 6.1.4\. Deployment Guidance for OpenID Providers
+###### 6.1.4\. Deployment Guidance for Relying Parties
+How to deal with RAF?
 
+###### 6.1.5\. Deployment Guidance for OpenID Providers
+Do we need this section? What is the possible role of the OP in this?
 
 **7\. Authorization**
 ---------------------
@@ -217,3 +236,13 @@ A companion document discussing the federated authorization problem and suggeste
 \[[SAMLSubId](https://docs.oasis-open.org/security/saml-subject-id-attr/v1.0/saml-subject-id-attr-v1.0.odt)\] OASIS Committee Specification, SAMLV2.0 Subject Identifier Attributes Profile Version 1.0, January 2019, [https://docs.oasis-open.org/security/saml-subject-id-attr/v1.0/saml-subject-id-attr-v1.0.odt](https://docs.oasis-open.org/security/saml-subject-id-attr/v1.0/saml-subject-id-attr-v1.0.odt).
 
 \[[SCHAC](https://wiki.refeds.org/display/STAN/SCHAC)\] REFEDS, “Schema for ACademia,” [https://refeds.org/specifications/schac](https://refeds.org/specifications/schac)[.](https://wiki.refeds.org/display/STAN/SCHAC)
+
+\[Trustmark](https://openid.net/specs/openid-federation-1_0.html#name-trust-marks) Trustmarks, OpenID Federation 1.0,[https://openid.net/specs/openid-federation-1_0.html#name-trust-marks] (https://openid.net/specs/openid-federation-1_0.html#name-trust-marks)
+
+\[OpenID Federation specification](https://openid.net/specs/openid-federation-1_0.htm), OpenID Federation 1.0, [https://openid.net/specs/openid-federation-1_0.htm](https://openid.net/specs/openid-federation-1_0.htm)
+
+\[OpenID Connect Dynamic Client Registration](https://openid.net/specs/openid-connect-registration-1_0.html), OpenID Connect Dynamic Client Registration, [https://openid.net/specs/openid-connect-registration-1_0.html](https://openid.net/specs/openid-connect-registration-1_0.html)
+
+\[Metadata Languages and Scripts](https://openid.net/specs/openid-connect-registration-1_0.html#LanguagesAndScripts), Metadata Languages and Scripts, OpenID Connect Dynamic Client Registration, Section 2.1, [https://openid.net/specs/openid-connect-registration-1_0.html#LanguagesAndScripts](https://openid.net/specs/openid-connect-registration-1_0.html#LanguagesAndScripts)
+
+\[White Paper for implementation of mappings between SAML 2.0 and OpenID Connect in Research and Education][https://docs.google.com/document/d/1b-Mlet3Lq7qKLEf1BnHJ4nL1fq-vMe7fzpXyrq2wp08/edit#heading=h.c4ib3eojk7el]
