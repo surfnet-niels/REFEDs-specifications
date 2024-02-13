@@ -81,7 +81,7 @@ These are the requirements to assert this entity label; any change MUST be repor
 The mechanism by which this entity label provides for consistent attribute release is through the definition of a set of commonly supported and consumed attributes. The attributes chosen represent a privacy baseline such that further minimization achieves no particular benefit for applicable services. Thus, the minimal disclosure principle is designed into the label.
 
 The use of the <md:RequestedAttribute> mechanism supported by SAML metadata is outside the scope of this category, and may co-exist with it in deployments as desired, subject to this specification’s requirements being met.
-==Do we have a similar ptoblem with OIDC?==
+`Do we have a similar ptoblem with OIDC?`
 
 #### 5.1 Required Attributes
 
@@ -98,7 +98,8 @@ These abstract elements are bound to protocol-specific definitions in the follow
 
 It is understood that not every subject can necessarily be associated with values for every attribute. For example, some users may have no formal affiliation with the issuing organization. In such cases, it is expected that those attribute(s) may not be provided. The designation that all these attributes are required is a general obligation and not specific to a given subject.
 
-With regard to assurance, the REFEDS Assurance Framework \[RAF\] is REQUIRED as a source of values, but other frameworks and their values are permitted. The requirement to support the REFEDS Assurance Framework implies that at least one value, ‘[https://refeds.org/assurance](https://refeds.org/assurance)‘ MUST be supplied, ==but no others are specifically required unless the IdP deems them to be applicable.==
+With regard to assurance, the REFEDS Assurance Framework \[RAF\] is REQUIRED as a source of values, but other frameworks and their values are permitted. The requirement to support the REFEDS Assurance Framework implies that at least one value, ‘[https://refeds.org/assurance](https://refeds.org/assurance)‘ MUST be supplied, 
+`but no others are specifically required unless the IdP deems them to be applicable.`
 
 Identity Providers are not expected or required to alter their business processes or to provide any particular assurance level for their subjects, but rather are required to communicate what they do provide, or other applicable information as appropriate.
 
@@ -192,7 +193,7 @@ The metadata requirements for impementing the registration criteria follow the O
 To implement the registration criteria as describe in Chapter 4 the Service should:
 *   (RC3.1)  The Service provides an client_name, client_uri, and policy_uri in metadata. Including an English language version in accordance with the Metadata Languages and Scripts section 2.1 [Metadata Languages and Scripts] is RECOMMENDED.
 *   (RC3.2) The Service provides one or more contacts in metadata, using the contacts parameter
-== ToDo: This does not align well with the current best pratice in SAML to have a clear seperation of concerns (admin/technical/helpdesk/security) ==
+` ToDo: This does not align well with the current best pratice in SAML to have a clear seperation of concerns (admin/technical/helpdesk/security) `
 
 ###### 6.1.3 Attribute set
 Describe how in OIDC we use a scope(?)
