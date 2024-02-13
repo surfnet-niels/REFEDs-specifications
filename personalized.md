@@ -63,7 +63,7 @@ By registering for this Entity Label, a Service Provider has agreed to the regis
 **4\. Registration Criteria**
 -----------------------------
 
-When a Service Provider’s federation registers the Service in the Entity Label, the federation registrar MUST perform at least the following checks:
+When a Service federation registers the Service in the Entity Label, the federation registrar MUST perform at least the following checks:
 
 *   (RC1) The service has a proven and documented need for the personally identifiable information that forms the attribute bundle for this entity label.
 *   (RC2) The Service has committed to data minimisation and will not use the attributes for purposes other than as described in their request.
@@ -186,38 +186,38 @@ An Identity Provider that supports this entity category would exhibit the follow
 --------------------------------------------
 
 ###### 6.2.1 Trustmark
-To signal compliance when using OIDC and OpenID Federation the label is to be used as a Trustmark [Trustmark]. This definition is written in compliance with the Trustmark specification as described in the OpenID Federation specification [OpenID Federation specification];
+To signal compliance when using OIDC and OpenID Federation the label is to be used as a Trustmark [Trustmark]. This definition is written in compliance with the Trustmark specification as described in the OpenID Federation specification [OpenID Federation specification]; In OpenID Connect Relying Parties (RP) are the data consumers and OpenID Providers (OP) are the data providers.
 
-The Personalized Access Label has different semantics when it comes to identity sources and services that are consuming identity information.
+The Personalized Access Label has different semantics when it comes to OPs and RPS that are consuming identity information.
 In the case of a service, a need must be confirmed for the personalized data, so that excessive or uncesessary personal data transfer can be prevented. This may be done for instance by a federation registrar. The services should not self-assert such a label.
 
-In case of an identity source, the source itself may signal its capability and willingness to release personal data. Since they are data controllers for their users, they may decide this internally. Therefore, personalized access release capability may be self-asserted. 
+In case of an OP, the source itself may signal its capability and willingness to release personal data. Since they are data controllers for their users, they may decide this internally. Therefore, personalized access release capability may be self-asserted. 
 
-In OpenID Connect Relying Parties (RP) are the data consumers and OpenID Providers (OP) are the data providers.
+RPs can be holders of "Personalized Access RP" trust marks, which MUST NOT be self-asserted. They need to be issued by a trustmark issuer defined by the trust anchor according to OpenID Federation specifications. If a trustmark issuer issues this trust mark it MUST (SHOULD?) establish a mechanism to verify that the OP indeed has this capability.
 
-RPs can be holders of "Personalized Access RP" trust marks, which MUST not be self-asserted. They need to be issued by a trustmark issuer defined by the trust anchor according to OpenID Federation specifications. If a trustmark issuer issues this trust mark it MUST (SHOULD?) establish a mechanism to verify that the OP indeed has this capability.
-
-OPs can be holders of "Personalized Access OP" trust marks, which MAY be self asserted or MAY be issued by a trustmark issuer defined by the trust anchor according to OpenID Federation specifications. If a trustmark issuer issues this trust mark it MAY establish a mechanism to verify that the OP indeed has this capability.
+OPs can be holders of "Personalized Access OP" trust marks, which MAY be self asserted. If a trustmark issuer issues this trust mark it MAY establish a mechanism to verify that the RP indeed has this need.
 
 In order for an OP to release data to an RP according to the Personalized Access mechanism, it MUST establish a trust chain from the RP to the trust anchor and it MUST verify the Personalized Access RP trust mark. Both the establishment of the trust chain and the trust mark verification MUST be done according to the OpenID Federation specification. This check MUST be done periodically and MAY be done before each transaction.
 
 RPs MAY rely on "Personalized Access OP" trust mark for discovery purposes.
 
-###### 6.1.2 Implementing the Registration Criteria
-The metadata requirements for impementing the registration criteria follow the OpenID Connect Dynamic Client Registration [OpenID Connect Dynamic Client Registration]
-To implement the registration criteria as describe in Chapter 4 the Service should:
-*   (RC3.1)  The Service provides an client_name, client_uri, and policy_uri in metadata. Including an English language version in accordance with the Metadata Languages and Scripts section 2.1 [Metadata Languages and Scripts] is RECOMMENDED.
+The Trustmark issuer MUST validate the Trustmark Issuence Criteria before the Trustmark is issued
+
+###### 6.2.2 Implementing the Trustmark Issuence Criteria
+The client metadata requirements for recieving the Trustmark make use of the OpenID Connect Dynamic Client Registration specification [OpenID Connect Dynamic Client Registration]
+To be allagable for the Trustmark as described in Chapter 4 the Service should:
+*   (RC3.1)  The Service MUST provide an client_name, client_uri, and policy_uri in metadata. Including an English language version in accordance with the Metadata Languages and Scripts section 2.1 [Metadata Languages and Scripts] is RECOMMENDED.
 *   (RC3.2) The Service provides one or more contacts in metadata, using the contacts parameter
 ` ToDo: This does not align well with the current best pratice in SAML to have a clear seperation of concerns (admin/technical/helpdesk/security) `
 
 
-###### 6.1.3 Attribute set
+###### 6.2.3 Attribute set
 Describe how in OIDC we use a scope(?)
 
 
 [White Paper for implementation of mappings between SAML 2.0 and OpenID Connect in Research and Education][https://docs.google.com/document/d/1b-Mlet3Lq7qKLEf1BnHJ4nL1fq-vMe7fzpXyrq2wp08/edit#heading=h.c4ib3eojk7el]
 
-###### 6.1.4\. Deployment Guidance for Relying Parties
+###### 6.2.4\. Deployment Guidance for Relying Parties
 How to deal with RAF?
 
 ###### 6.1.5\. Deployment Guidance for OpenID Providers
