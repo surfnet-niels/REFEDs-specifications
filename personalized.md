@@ -186,7 +186,22 @@ An Identity Provider that supports this entity category would exhibit the follow
 --------------------------------------------
 
 ###### 6.2.1 Trustmark
-To signal compliance when using OIDC and OpenID Federation the label is to be used as a Trustmark [Trustmark]. This definition is written in compliance with the Trustmark specification as described in the OpenID Federation specification \[OpenID Federation specification\];
+To signal compliance when using OIDC and OpenID Federation the label is to be used as a Trustmark [Trustmark]. This definition is written in compliance with the Trustmark specification as described in the OpenID Federation specification [OpenID Federation specification];
+
+The Personalized Access Label has different semantics when it comes to identity sources and services that are consuming identity information.
+In the case of a service, a need must be confirmed for the personalized data, so that excessive or uncesessary personal data transfer can be prevented. This may be done for instance by a federation registrar. The services should not self-assert such a label.
+
+In case of an identity source, the source itself may signal its capability and willingness to release personal data. Since they are data controllers for their users, they may decide this internally. Therefore, personalized access release capability may be self-asserted. 
+
+In OpenID Connect Relying Parties (RP) are the data consumers and OpenID Providers (OP) are the data providers.
+
+RPs can be holders of "Personalized Access RP" trust marks, which MUST not be self-asserted. They need to be issued by a trustmark issuer defined by the trust anchor according to OpenID Federation specifications. If a trustmark issuer issues this trust mark it MUST (SHOULD?) establish a mechanism to verify that the OP indeed has this capability.
+
+OPs can be holders of "Personalized Access OP" trust marks, which MAY be self asserted or MAY be issued by a trustmark issuer defined by the trust anchor according to OpenID Federation specifications. If a trustmark issuer issues this trust mark it MAY establish a mechanism to verify that the OP indeed has this capability.
+
+In order for an OP to release data to an RP according to the Personalized Access mechanism, it MUST establish a trust chain from the RP to the trust anchor and it MUST verify the Personalized Access RP trust mark. Both the establishment of the trust chain and the trust mark verification MUST be done according to the OpenID Federation specification. This check MUST be done periodically and MAY be done before each transaction.
+
+RPs MAY rely on "Personalized Access OP" trust mark for discovery purposes.
 
 ###### 6.1.2 Implementing the Registration Criteria
 The metadata requirements for impementing the registration criteria follow the OpenID Connect Dynamic Client Registration [OpenID Connect Dynamic Client Registration]
@@ -194,6 +209,7 @@ To implement the registration criteria as describe in Chapter 4 the Service shou
 *   (RC3.1)  The Service provides an client_name, client_uri, and policy_uri in metadata. Including an English language version in accordance with the Metadata Languages and Scripts section 2.1 [Metadata Languages and Scripts] is RECOMMENDED.
 *   (RC3.2) The Service provides one or more contacts in metadata, using the contacts parameter
 ` ToDo: This does not align well with the current best pratice in SAML to have a clear seperation of concerns (admin/technical/helpdesk/security) `
+
 
 ###### 6.1.3 Attribute set
 Describe how in OIDC we use a scope(?)
@@ -215,7 +231,7 @@ None of the attributes defined in Section 5 are suitable for accurately signalli
 A companion document discussing the federated authorization problem and suggested practices can be found at \[FederatedAuthorization\].
 
 
-**9\. References**
+**8\. References**
 ------------------
 
 \[[BCP14](https://www.rfc-editor.org/info/bcp14)\] Bradner, S., “Key words for use in RFCs to Indicate Requirement Levels”, BCP 14, RFC 2119, March 1997; and Leiba, B., “Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words”, BCP 14, RFC 8174, May 2017, [https://www.rfc-editor.org/info/bcp14](https://www.rfc-editor.org/info/bcp14).
@@ -247,3 +263,4 @@ A companion document discussing the federated authorization problem and suggeste
 \[Metadata Languages and Scripts](https://openid.net/specs/openid-connect-registration-1_0.html#LanguagesAndScripts), Metadata Languages and Scripts, OpenID Connect Dynamic Client Registration, Section 2.1, [https://openid.net/specs/openid-connect-registration-1_0.html#LanguagesAndScripts](https://openid.net/specs/openid-connect-registration-1_0.html#LanguagesAndScripts)
 
 \[White Paper for implementation of mappings between SAML 2.0 and OpenID Connect in Research and Education][https://docs.google.com/document/d/1b-Mlet3Lq7qKLEf1BnHJ4nL1fq-vMe7fzpXyrq2wp08/edit#heading=h.c4ib3eojk7el]
+
