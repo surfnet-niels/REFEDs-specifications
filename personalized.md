@@ -212,8 +212,19 @@ To be allagable for the Trustmark as described in Chapter 4 the Service should:
 
 
 ###### 6.2.3 Attribute set
+
+
 Describe how in OIDC we use a scope(?)
 
+We try to use standard claims whenever possible
+https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims
+
+*   _organization_ : the issuer MAY use 'shac_home_organisation' claim and scope to relay this information. NOTE: organisation_name claim is use in the wild ?
+*   _user identifier_ : the issuer MAY use 'sub' claim for this purpose (might be included in the OpenID scope). 
+*   _person name_ : the issuer MAY use the 'profile' scope which provides access for 'name', 'family_name', given_name', 'middle_name' but also potentially 'nickname', 'preferred_username', 'profile', 'picture', 'website', 'gender', 'birthdate', 'zoneinfo', 'locale', and 'updated_at' according to the standard claims
+*   _email address_ : the issuer MUST use the 'email' claim for email address value; the issuer MUST use email_verified claim for the verified status.
+*   _affiliation_ : the issuer MAY use 'eduperson_scoped_affiliation' claim for this purpose. The issuer MAY use voperson_external_affiliation (TODO discuss)
+*   _assurance_ : the issuer MAY use 'eduperson_assurance'
 
 [White Paper for implementation of mappings between SAML 2.0 and OpenID Connect in Research and Education][https://docs.google.com/document/d/1b-Mlet3Lq7qKLEf1BnHJ4nL1fq-vMe7fzpXyrq2wp08/edit#heading=h.c4ib3eojk7el]
 
