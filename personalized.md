@@ -219,7 +219,7 @@ The claims for the scope are defined as following:
 
 | Member | Type | Definition|
 |---|---|---|
-|_user identifier_|string| 
+|_user identifier_|Subject-ID| 
 |_name_|string| End-User's full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the End-User's locale and preferences. The equivelent of the eduPerson DisplayName attribute
 |_given_name_|string| Given name(s) or first name(s) of the End-User. Note that in some cultures, people can have multiple given names; all can be present, with the names being separated by space characters. The equivelent of the eduPerson givenName attribute.
 |_family_name_|string| Surname(s) or last name(s) of the End-User. Note that in some cultures, people can have multiple family names or no family name; all can be present, with the names being separated by space characters. The equivelent of the eduPerson sn attribute.
