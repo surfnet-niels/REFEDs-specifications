@@ -38,8 +38,8 @@ An FAQ for the Entity Label has been made available to help deployments \[FAQ\].
 ------------------
 
 Candidates for the Personalized Access Entity Label are Services that have a proven need to receive a small set of personally identifiable information about their users in order to effectively provide their service to the user or to enable the user to signal their identity to other users within the service. The Service must be able to effectively demonstrate this need to the entity issueing the identifier for the label and demonstrate their compliance with regulatory requirements concerning personal data through a published Privacy Notice.
-None of the attributes are specifically intended to provide authorization information. See section 6 for a discussion of this use case.
-Depending on the implementation protocol used requirements may exist for the entity releasing the attributes towards the Services. See section 5 for a discussion og these cases.
+None of the attributes are specifically intended to provide authorization information. See section 7 for a discussion of this use case.
+Depending on the implementation protocol used different requirements exist for the entity releasing the attributes towards the Services. See section 6 for a discussion of these cases.
 
 **2\. Syntax**
 --------------
