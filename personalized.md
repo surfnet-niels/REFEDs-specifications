@@ -224,13 +224,10 @@ The claims for the scope are defined as following:
 |_given_name_|string| Given name(s) or first name(s) of the End-User. Note that in some cultures, people can have multiple given names; all can be present, with the names being separated by space characters. The equivelent of the eduPerson givenName attribute.
 |_family_name_|string| Surname(s) or last name(s) of the End-User. Note that in some cultures, people can have multiple family names or no family name; all can be present, with the names being separated by space characters. The equivelent of the eduPerson sn attribute.
 |_email_|string| End-User's e-mail address. Its value MUST conform to the RFC 5322 [RFC5322] addr-spec syntax. The RP MUST NOT rely upon this value being unique. If multiple email adresses are available, it is left to the implementer to choose which address needs to go into the single valued email claim
-|_email_verified_|boolean| See below
+|_email_verified_|boolean| true if the End-User's email address has been verified; otherwise false. When this Claim Value is true, this means that the OP took affirmative steps to ensure that this email address was controlled by the End-User at the time the verification was performed. The means by which an e-mail address is verified is context-specific, and dependent upon the trust framework or contractual agreements within which the parties are operating.
 |_eduperson_affiliation_|string| Specifies the person's relationship(s) to the institution in broad categories such as student, faculty, staff, alum, etc. Permissible values: faculty, student, staff, alum, member, affiliate, employee, library-walk-in. The equivelent of the  eduPersonScopedAffiliation attribute.
 |_schac_home_organization_|string| A person's home organization using the domain name of the organization. The equivelent of the schacHomeOrganization attribute
 |_eduperson_assurance_|string| Set of URIs that assert compliance with specific standards for identity assurance. The equivelent of the eduPersonAssurance attribute.
-
-Using email_verified
-OIDC has a claim called email_verified, which is defined as: "true if the End-User's email address has been verified; otherwise false. When this Claim Value is true, this means that the OP took affirmative steps to ensure that this email address was controlled by the End-User at the time the verification was performed. The means by which an e-mail address is verified is context-specific, and dependent upon the trust framework or contractual agreements within which the parties are operating."
 
 ###### 6.2.4\. Deployment Guidance for Relying Parties
 A Relying Parties that conforms to this entity label MUST exhibit the following Trustmark in metadata:
