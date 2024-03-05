@@ -103,7 +103,7 @@ With regard to assurance, the REFEDS Assurance Framework \[RAF\] is REQUIRED as 
 
 Identity Providers are not expected or required to alter their business processes or to provide any particular assurance level for their subjects, but rather are required to communicate what they do provide, or other applicable information as appropriate.
 
-**6\. Protocol specific implmenentation**
+**6\. Protocol specific implementation**
 ------------------------
 
 ##### 6.1 SAML 2.0
@@ -213,17 +213,17 @@ To be allagable for the Trustmark as described in Chapter 4 the Service should:
 
 ###### 6.2.3 Scope and claims
 
-For the purpose of streamlied exchange of personal data, a scope named "personalized" is introduced. The OP and RP MUST implement the use of this scope if they claim compliance with the Personalized Access Entity Label. Requesting claims follows the pattern as described in the OpenID Connect specification, section 5.4 [Requesting Claims using Scope Values]
+For the purpose of streamlined exchange of personal data, a scope named "personalized" is introduced. The OP and RP MUST implement the use of this scope if they claim compliance with the Personalized Access Entity Label. Requesting claims follows the pattern as described in the OpenID Connect specification, section 5.4 [Requesting Claims using Scope Values].
 
-The "personalized" scope re-uses the basic profile as described in the is defined in the White Paper for implementation of mappings between SAML 2.0 and OpenID Connect in Research and Education [White Paper for implementation of mappings between SAML 2.0 and OpenID Connect in Research and Education] and extends this with affiliaton, organisation and assurance claims in line with the whitepaper. The claims for the scope are defined as following:
+The claims for the scope are defined as following:
 
 | Member | Type | Definition|
 |---|---|---|
 |_user identifier_|string| 
-|_name_|striing| The name(s) that should appear in white-pages-like applications for this person. From RFC2798 description: "preferred name of a person to be used when displaying entries.". The equivelent of the eduPerson DisplayName attribute
-|_given_name_|string| From RFC4519 description:"The 'givenName' attribute type contains name strings that are the part of a person's name that is not their surname. Each string is one value of this multi-valued attribute." The equivelent of the eduPerson givenName attribute.
-|_family_name_|string| Surname or family name. From RFC4519: "The 'sn' ('surname' in X.500) attribute type contains name strings for the family names of a person. Each string is one value of this multi-valued attribute." The equivelent of the eduPerson sn attribute.
-|_email_|string| From RFC4524: The 'mail' (rfc822mailbox) attribute type holds Internet mail addresses in Mailbox [RFC2821] form (e.g., user@example.com). The equivelent of the eduPerson mail attribute. If multiple email adresses are available, it is left to the implementer to choose which address needs to go into the single valued email claim
+|_name_|string| End-User's full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the End-User's locale and preferences. The equivelent of the eduPerson DisplayName attribute
+|_given_name_|string| Given name(s) or first name(s) of the End-User. Note that in some cultures, people can have multiple given names; all can be present, with the names being separated by space characters. The equivelent of the eduPerson givenName attribute.
+|_family_name_|string| Surname(s) or last name(s) of the End-User. Note that in some cultures, people can have multiple family names or no family name; all can be present, with the names being separated by space characters. The equivelent of the eduPerson sn attribute.
+|_email_|string| End-User's e-mail address. Its value MUST conform to the RFC 5322 [RFC5322] addr-spec syntax. The RP MUST NOT rely upon this value being unique. If multiple email adresses are available, it is left to the implementer to choose which address needs to go into the single valued email claim
 |_email_verified_|boolean| See below
 |_eduperson_affiliation_|string| Specifies the person's relationship(s) to the institution in broad categories such as student, faculty, staff, alum, etc. Permissible values: faculty, student, staff, alum, member, affiliate, employee, library-walk-in. The equivelent of the  eduPersonScopedAffiliation attribute.
 |_schac_home_organization_|string| A person's home organization using the domain name of the organization. The equivelent of the schacHomeOrganization attribute
@@ -232,23 +232,16 @@ The "personalized" scope re-uses the basic profile as described in the is define
 Using email_verified
 OIDC has a claim called email_verified, which is defined as: "true if the End-User's email address has been verified; otherwise false. When this Claim Value is true, this means that the OP took affirmative steps to ensure that this email address was controlled by the End-User at the time the verification was performed. The means by which an e-mail address is verified is context-specific, and dependent upon the trust framework or contractual agreements within which the parties are operating."
 
-It is up to the implementor to select which email address is to be provided through the mail claim in case multiple values are available. For the email address provided, it is recommended to set the email_verified claim to "true" if the email address that is being provided in the claim was:
-- Provided by the Institutional Identity Provider as part of the SAML assertion, and 
-- The domain part of the email address is a (sub) domain of the institution
-- ```The domain of the email is validated by the implementation based on the <shibmd:Scope> element from the entity's SAML metadata.```
-
-As in such a case it may be assumed the email service being used is under direct administrative control of the Institution, and the requirements for setting email_verified to "True" have been fulfilled.
-
 ###### 6.2.4\. Deployment Guidance for Relying Parties
 A Relying Parties that conforms to this entity label MUST exhibit the following Trustmark in metadata:
 ```
 
 ```
 
-Relying Parties SHOULD rely on using the persomalized scope for requesting the bundle of claim defined in Section 5 and 6.2.3, but MAY ask for, or even require, other information as needed for additional purposes, via mechanisms that are outside the scope of this specification. A common example would be a requirement for indicating authorization to access a service (see Section 7).
+Relying Parties SHOULD rely on using the personalized scope for requesting the bundle of claim defined in Section 5 and 6.2.3, but MAY ask for, or even require, other information as needed for additional purposes, via mechanisms that are outside the scope of this specification. A common example would be a requirement for indicating authorization to access a service (see Section 7).
 If individual claims are requested, e.g. by using the claims request paramater [Requesting Claims using the "claims" Request Parameter], and the OP is advertising the personalized Trustmark, the Relying Party may assume the semantics of the claims issued by the OP are consistent with section 6.2.3.
 
-###### 6.1.5\. Deployment Guidance for OpenID Providers
+###### 6.2.5\. Deployment Guidance for OpenID Providers
 An OpenID Provider indicates conformance to this entity label by exhibiting the Trustmark in its metadata. Such an OpenID Provider MUST, for a significant subset of its user population, release all required claims in the bundle defined in Section 5 to all tagged Relying Parties, either automatically or subject to user consent or notification, ```without administrative involvement by any party.```
 
 An OpenID Provider that supports this entity label would exhibit the following entity attribute in SAML metadata:
