@@ -211,33 +211,59 @@ To be allagable for the Trustmark as described in Chapter 4 the Service should:
 ` ToDo: This does not align well with the current best pratice in SAML to have a clear seperation of concerns (admin/technical/helpdesk/security) `
 
 
-###### 6.2.3 Attribute set
+###### 6.2.3 Scope and claims
 
+For the purpose of streamlied exchange of personal data, a scope named "personalized" is introduced. The OP and RP MUST implement the use of this scope if they claim compliance with the Personalized Access Entity Label. Requesting claims follows the pattern as described in the OpenID Connect specification, section 5.4 [Requesting Claims using Scope Values]
 
-Describe how in OIDC we use a scope(?)
+The "personalized" scope re-uses the basic profile as described in the is defined in the White Paper for implementation of mappings between SAML 2.0 and OpenID Connect in Research and Education [White Paper for implementation of mappings between SAML 2.0 and OpenID Connect in Research and Education] and extends this with affiliaton, organisation and assurance claims in line with the whitepaper. The claims for the scope are defined as following:
 
-We try to use standard claims whenever possible
-https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims
+| Member | Type | Definition|
+|---|---|---|
+|_user identifier_|string| 
+|_name_|striing| The name(s) that should appear in white-pages-like applications for this person. From RFC2798 description: "preferred name of a person to be used when displaying entries.". The equivelent of the eduPerson DisplayName attribute
+|_given_name_|string| From RFC4519 description:"The 'givenName' attribute type contains name strings that are the part of a person's name that is not their surname. Each string is one value of this multi-valued attribute." The equivelent of the eduPerson givenName attribute.
+|_family_name_|string| Surname or family name. From RFC4519: "The 'sn' ('surname' in X.500) attribute type contains name strings for the family names of a person. Each string is one value of this multi-valued attribute." The equivelent of the eduPerson sn attribute.
+|_email_|string| From RFC4524: The 'mail' (rfc822mailbox) attribute type holds Internet mail addresses in Mailbox [RFC2821] form (e.g., user@example.com). The equivelent of the eduPerson mail attribute. If multiple email adresses are available, it is left to the implementer to choose which address needs to go into the single valued email claim
+|_email_verified_|boolean| See below
+|_eduperson_affiliation_|string| Specifies the person's relationship(s) to the institution in broad categories such as student, faculty, staff, alum, etc. Permissible values: faculty, student, staff, alum, member, affiliate, employee, library-walk-in. The equivelent of the  eduPersonScopedAffiliation attribute.
+|_schac_home_organization_|string| A person's home organization using the domain name of the organization. The equivelent of the schacHomeOrganization attribute
+|_eduperson_assurance_|string| Set of URIs that assert compliance with specific standards for identity assurance. The equivelent of the eduPersonAssurance attribute.
 
-*   _organization_ : the issuer MAY use 'shac_home_organisation' claim and scope to relay this information. NOTE: organisation_name claim is use in the wild ?
-*   _user identifier_ : the issuer MAY use 'sub' claim for this purpose (might be included in the OpenID scope). 
-*   _person name_ : the issuer MAY use the 'profile' scope which provides access for 'name', 'family_name', given_name', 'middle_name' but also potentially 'nickname', 'preferred_username', 'profile', 'picture', 'website', 'gender', 'birthdate', 'zoneinfo', 'locale', and 'updated_at' according to the standard claims
-*   _email address_ : the issuer MUST use the 'email' claim for email address value; the issuer MUST use email_verified claim for the verified status.
-*   _affiliation_ : the issuer MAY use 'eduperson_scoped_affiliation' claim for this purpose. The issuer MAY use voperson_external_affiliation (TODO discuss)
-*   _assurance_ : the issuer MAY use 'eduperson_assurance'
+Using email_verified
+OIDC has a claim called email_verified, which is defined as: "true if the End-User's email address has been verified; otherwise false. When this Claim Value is true, this means that the OP took affirmative steps to ensure that this email address was controlled by the End-User at the time the verification was performed. The means by which an e-mail address is verified is context-specific, and dependent upon the trust framework or contractual agreements within which the parties are operating."
 
-[White Paper for implementation of mappings between SAML 2.0 and OpenID Connect in Research and Education][https://docs.google.com/document/d/1b-Mlet3Lq7qKLEf1BnHJ4nL1fq-vMe7fzpXyrq2wp08/edit#heading=h.c4ib3eojk7el]
+It is up to the implementor to select which email address is to be provided through the mail claim in case multiple values are available. For the email address provided, it is recommended to set the email_verified claim to "true" if the email address that is being provided in the claim was:
+- Provided by the Institutional Identity Provider as part of the SAML assertion, and 
+- The domain part of the email address is a (sub) domain of the institution
+- ```The domain of the email is validated by the implementation based on the <shibmd:Scope> element from the entity's SAML metadata.```
+
+As in such a case it may be assumed the email service being used is under direct administrative control of the Institution, and the requirements for setting email_verified to "True" have been fulfilled.
 
 ###### 6.2.4\. Deployment Guidance for Relying Parties
-How to deal with RAF?
+A Relying Parties that conforms to this entity label MUST exhibit the following Trustmark in metadata:
+```
+
+```
+
+Relying Parties SHOULD rely on using the persomalized scope for requesting the bundle of claim defined in Section 5 and 6.2.3, but MAY ask for, or even require, other information as needed for additional purposes, via mechanisms that are outside the scope of this specification. A common example would be a requirement for indicating authorization to access a service (see Section 7).
+If individual claims are requested, e.g. by using the claims request paramater [Requesting Claims using the "claims" Request Parameter], and the OP is advertising the personalized Trustmark, the Relying Party may assume the semantics of the claims issued by the OP are consistent with section 6.2.3.
 
 ###### 6.1.5\. Deployment Guidance for OpenID Providers
-Do we need this section? What is the possible role of the OP in this?
+An OpenID Provider indicates conformance to this entity label by exhibiting the Trustmark in its metadata. Such an OpenID Provider MUST, for a significant subset of its user population, release all required claims in the bundle defined in Section 5 to all tagged Relying Parties, either automatically or subject to user consent or notification, ```without administrative involvement by any party.```
+
+An OpenID Provider that supports this entity label would exhibit the following entity attribute in SAML metadata:
+```
+
+```
+
+
+
+
 
 **7\. Authorization**
 ---------------------
 
-None of the attributes defined in Section 5 are suitable for accurately signalling access authorization; signalling authorization is out of scope for this entity category. While they are often used as approximations, this inevitably denies access to authorized users and permits access to unauthorized users.
+None of the attributes or claims defined in Section 5 are suitable for accurately signalling access authorization; signalling authorization is out of scope for this entity label. While they are often used as approximations, this inevitably denies access to authorized users and permits access to unauthorized users.
 
 A companion document discussing the federated authorization problem and suggested practices can be found at \[FederatedAuthorization\].
 
@@ -273,5 +299,9 @@ A companion document discussing the federated authorization problem and suggeste
 
 \[Metadata Languages and Scripts](https://openid.net/specs/openid-connect-registration-1_0.html#LanguagesAndScripts), Metadata Languages and Scripts, OpenID Connect Dynamic Client Registration, Section 2.1, [https://openid.net/specs/openid-connect-registration-1_0.html#LanguagesAndScripts](https://openid.net/specs/openid-connect-registration-1_0.html#LanguagesAndScripts)
 
+\[Requesting Claims using Scope Values] OpenID Connect Core 1.0 incorporating errata set 2 [https://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims]
+
 \[White Paper for implementation of mappings between SAML 2.0 and OpenID Connect in Research and Education][https://docs.google.com/document/d/1b-Mlet3Lq7qKLEf1BnHJ4nL1fq-vMe7fzpXyrq2wp08/edit#heading=h.c4ib3eojk7el]
+
+\[Requesting Claims using the "claims" Request Parameter] OpenID Connect Core 1.0 incorporating errata set 2 [https://openid.net/specs/openid-connect-core-1_0.html#ClaimsParameter]
 
