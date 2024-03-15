@@ -188,26 +188,26 @@ An Identity Provider that supports this entity category would exhibit the follow
 ###### 6.2.1 Trustmark
 To signal compliance when using OIDC and OpenID Federation the label is to be used as a Trustmark [Trustmark]. This definition is written in compliance with the Trustmark specification as described in the OpenID Federation specification [OpenID Federation specification]; In OpenID Connect Relying Parties (RP) are the data consumers and OpenID Providers (OP) are the data providers.
 
-The Personalized Access Label has different semantics when it comes to OPs and RPS that are consuming identity information.
-In the case of a service, a need must be confirmed for the personalized data, so that excessive or uncesessary personal data transfer can be prevented. This may be done for instance by a federation registrar. The services should not self-assert such a label.
-
-In case of an OP, the source itself may signal its capability and willingness to release personal data. Since they are data controllers for their users, they may decide this internally. Therefore, personalized access release capability may be self-asserted. 
-
-RPs can be holders of "Personalized Access RP" trust marks, which MUST NOT be self-asserted. They need to be issued by a trustmark issuer defined by the trust anchor according to OpenID Federation specifications. If a trustmark issuer issues this trust mark it MUST (SHOULD?) establish a mechanism to verify that the OP indeed has this capability.
-
-OPs can be holders of "Personalized Access OP" trust marks, which MAY be self asserted. If a trustmark issuer issues this trust mark it MAY establish a mechanism to verify that the RP indeed has this need.
+The Personalized Access Label has different semantics when it comes to OPs and RPS that are consuming identity information:
+- RPs can be holders of "Personalized Access RP" trust mark, which MUST NOT be self-asserted. The Trustmark MUST be issued by the federation registrar using the Trust Anchor. 
+- OPs can be holders of "Personalized Access OP" trust mark, which MAY be self asserted. 
+- RPs MAY rely on "Personalized Access OP" trust mark for discovery purposes.
+- The Trustmark issuer MUST validate the Trustmark Issuence Criteria before the Trustmark is issued
 
 In order for an OP to release data to an RP according to the Personalized Access mechanism, it MUST establish a trust chain from the RP to the trust anchor and it MUST verify the Personalized Access RP trust mark. Both the establishment of the trust chain and the trust mark verification MUST be done according to the OpenID Federation specification. This check MUST be done periodically and MAY be done before each transaction.
-
-RPs MAY rely on "Personalized Access OP" trust mark for discovery purposes.
-
-The Trustmark issuer MUST validate the Trustmark Issuence Criteria before the Trustmark is issued
 
 ###### 6.2.2 Implementing the Trustmark Issuence Criteria
 The client metadata requirements for recieving the Trustmark make use of the OpenID Connect Dynamic Client Registration specification [OpenID Connect Dynamic Client Registration]
 To be allagable for the Trustmark as described in Chapter 4 the Service should:
 *   (RC3.1)  The Service MUST provide an client_name, client_uri, and policy_uri in metadata. Including an English language version in accordance with the Metadata Languages and Scripts section 2.1 [Metadata Languages and Scripts] is RECOMMENDED.
-*   (RC3.2) The Service provides one or more contacts in metadata, using the contacts parameter
+*   (RC3.2) The Service provides one or more contacts in metadata, using a contacts_detailed claim. The standard contacts claim as it is available in the specification makes it very hard to add specific detailed information on the type of contact and the prefered contact method. Hence this specification introduduces a new claim 'contacts_detailed' which provides a structered way to provide more detailed contact information. 
+```
+"contacts": [
+   "technical": {"name": "Example.org Helpdesk", "email": "tech@example.org"},
+   "security": {"name": "Example.org CERT", "email": "cert@example.org"},
+]
+```
+
 ` ToDo: This does not align well with the current best pratice in SAML to have a clear seperation of concerns (admin/technical/helpdesk/security) `
 
 
@@ -232,8 +232,47 @@ The claims for the scope are defined as following:
 ###### 6.2.4\. Deployment Guidance for Relying Parties
 A Relying Parties that conforms to this entity label MUST exhibit the following Trustmark in metadata:
 ```
-
+{
+  "iss": "https://rp.example.org/",
+  "sub": "https://rp.example.org/",
+  "iat": 1516239022,
+  "exp": 1516298022,
+  "trust_marks": [
+    {
+     "id": "https://refeds.org/category/personalized/rp",
+     "trust_mark":
+       "eyJraWQiOiJmdWtDdUtTS3hwWWJjN09lZUk3Ynlya3N5a0E1bDhPb2RFSXVyOH
+        JoNFlBIiwidHlwIjoidHJ1c3QtbWFyaytqd3QiLCJhbGciOiJSUzI1NiJ9.eyJ
+        pc3MiOiJodHRwczovL3d3dy5hZ2lkLmdvdi5pdCIsInN1YiI6Imh0dHBzOi8vc
+        nAuZXhhbXBsZS5pdC9zcGlkIiwiaWF0IjoxNTc5NjIxMTYwLCJpZCI6Imh0dHB
+        zOi8vd3d3LnNwaWQuZ292Lml0L2NlcnRpZmljYXRpb24vcnAiLCJsb2dvX3Vya
+        SI6Imh0dHBzOi8vd3d3LmFnaWQuZ292Lml0L3RoZW1lcy9jdXN0b20vYWdpZC9
+        sb2dvLnN2ZyIsInJlZiI6Imh0dHBzOi8vZG9jcy5pdGFsaWEuaXQvZG9jcy9zc
+        GlkLWNpZS1vaWRjLWRvY3MvaXQvdmVyc2lvbmUtY29ycmVudGUvIn0.AGf5Y4M
+        oJt22rznH4i7Wqpb2EF2LzE6BFEkTzY1dCBMCK-8P_vj4Boz7335pUF45XXr2j
+        x5_waDRgDoS5vOO-wfc0NWb4Zb_T1RCwcryrzV0z3jJICePMPM_1hZnBZjTNQd
+        4EsFNvKmUo_teR2yzAZjguR2Rid30O5PO8kJtGaXDmz-rWaHbmfLhlNGJnqcp9
+        Lo1bhkU_4Cjpn2bdX7RN0JyfHVY5IJXwdxUMENxZd-VtA5QYiw7kPExT53XcJO
+        89ebe_ik4D0dl-vINwYhrIz2RPnqgA1OdbK7jg0vm8Tb3aemRLG7oLntHwqLO-
+        gGYr6evM2_SgqwA0lQ9mB9yhw"
+    }
+  ],
+  ...
 ```
+
+An example of a decoded Trust Mark payload issued to an RP, attesting to conformance to a national public service profile:
+```
+{
+  "id":"https://refeds.org/category/personalized/rp",
+  "iss": "https://md.edugain.org/trustmarks",
+  "sub": "https://rp.example.org/",
+  "iat": 1579621160,
+  "ref": "https://refeds.org/category/personalized"
+}
+```
+
+
+
 
 Relying Parties SHOULD rely on using the personalized scope for requesting the bundle of claim defined in Section 5 and 6.2.3, but MAY ask for, or even require, other information as needed for additional purposes, via mechanisms that are outside the scope of this specification. A common example would be a requirement for indicating authorization to access a service (see Section 7).
 If individual claims are requested, e.g. by using the claims request paramater [Requesting Claims using the "claims" Request Parameter], and the OP is advertising the personalized Trustmark, the Relying Party may assume the semantics of the claims issued by the OP are consistent with section 6.2.3.
