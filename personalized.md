@@ -26,7 +26,7 @@ This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 Inter
 
 ### Overview
 
-Research and Education Federations are invited to use the REFEDS Personalized Access Entity Label with their members to support the release of attributes to Service Providers meeting the requirements described below.
+Research and Education Federations are invited to use the REFEDS Personalized Access Entity Label with their members to support the release of attributes to Services meeting the requirements described below.
 
 The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in RFC 2119 \[BCP14\].
 
@@ -37,7 +37,7 @@ An FAQ for the Entity Label has been made available to help deployments \[FAQ\].
 **1\. Definition**
 ------------------
 
-Candidates for the Personalized Access Entity Label are Services that have a proven need to receive a small set of personally identifiable information about their users in order to effectively provide their service to the user or to enable the user to signal their identity to other users within the service. The Service must be able to effectively demonstrate this need to the entity issueing the identifier for the label and demonstrate their compliance with regulatory requirements concerning personal data through a published Privacy Notice.
+Candidates for the Personalized Access Entity Label are Services that have a proven need to receive a small set of personally identifiable information about their users in order to effectively provide their service to the user or to enable the user to signal their identity to other users within the service. The Service must be able to effectively demonstrate this need to the entity issueing the identifier for the label, typically the registrar, and demonstrate their compliance with regulatory requirements concerning personal data through a published Privacy Notice.
 None of the attributes are specifically intended to provide authorization information. See section 7 for a discussion of this use case.
 Depending on the implementation protocol used different requirements exist for the entity releasing the attributes towards the Services. See section 6 for a discussion of these cases.
 
@@ -53,22 +53,19 @@ The following URI is used as the identifier for the entity label:
 
 By asserting a Service Provider to be a member of this Entity Label, a federation registrar claims that:
 
-*   (SE1) The Service Provider requested assignment of the label and complies with this entity label’s registration criteria.
-*   (SE2) The Service Provider’s request to be assigned the Personalized Access Entity Label has been reviewed against the provided REFEDS \[Guidelines\] and approved by the federation registrar.
+*   (SE1) The Service requested assignment of the label and complies with this entity label’s registration criteria.
+*   (SE2) The Service's request to be assigned the Personalized Access Entity Label has been reviewed against the provided REFEDS \[Guidelines\] and approved by the federation registrar.
 
 By registering for this Entity Label, a Service Provider has agreed to the registration criteria as defined in Section 4.
-
-~~By asserting support for this Entity Label, Identity Providers are indicating that they will release attributes to Service Providers that also assert this category.~~
 
 **4\. Registration Criteria**
 -----------------------------
 
-When a Service federation registers the Service in the Entity Label, the federation registrar MUST perform at least the following checks:
+When a registrar registers the Service in the Entity Label, the federation registrar MUST perform at least the following checks:
 
-*   (RC1) The service has a proven and documented need for the personally identifiable information that forms the attribute bundle for this entity label.
+*   (RC1) The service has a proven and documented need for the personally identifiable information that forms the attribute bundle (chapter 5) for this entity label.
 *   (RC2) The Service has committed to data minimisation and will not use the attributes for purposes other than as described in their request.
 *   (RC3) Ensure that the service meets the following technical requirements:
-    *   ~~(RC3.1) The Service Provider provides an <mdui:DisplayName>, <mdui:InformationURL>, and <mdui:PrivacyStatementURL> in metadata. Including an English language version (i.e., xml:lang=”en”) is RECOMMENDED.~~
     *   (RC3.1) To support enduser facing intercaes, the Service provides a descriptive name of the service, an information URL which points to a web page where you may further elaborate details about your service or organization and an URL points to a web page containing your service (organization)'s user privacy and data protection statement. Including an English language version (i.e., xml:lang=”en”) is RECOMMENDED.
     *   (RC3.2) The Service provides one or more contacts in metadata.
     The techical implementation for these criteria depend on the specific protocol used and are described in Chapter 6.
@@ -180,36 +177,32 @@ An Identity Provider that supports this entity category would exhibit the follow
   </saml:Attribute>
 </mdattr:EntityAttributes>
 ```
-
-
 ##### 6.2 OpenIDConnect and OpenID Federation
 --------------------------------------------
 
 ###### 6.2.1 Trustmark
-To signal compliance when using OIDC and OpenID Federation the label is to be used as a Trustmark [Trustmark]. This definition is written in compliance with the Trustmark specification as described in the OpenID Federation specification [OpenID Federation specification]; In OpenID Connect Relying Parties (RP) are the data consumers and OpenID Providers (OP) are the data providers.
+To signal compliance when using OIDC with OpenID Federation the label is to be used as a Trustmark [Trustmark]. This definition is written in compliance with the Trustmark specification as described in the OpenID Federation specification [OpenID Federation specification]; In OpenID Connect Relying Parties (RP) are the data consumers and OpenID Providers (OP) are the data providers.
 
 The Personalized Access Label has different semantics when it comes to OPs and RPS that are consuming identity information:
 - RPs can be holders of "Personalized Access RP" trust mark, which MUST NOT be self-asserted. The Trustmark MUST be issued by the federation registrar using the Trust Anchor. 
+- The Trustmark issuer MUST validate the Trustmark Issuence Criteria before the Trustmark is issued
 - OPs can be holders of "Personalized Access OP" trust mark, which MAY be self asserted. 
 - RPs MAY rely on "Personalized Access OP" trust mark for discovery purposes.
-- The Trustmark issuer MUST validate the Trustmark Issuence Criteria before the Trustmark is issued
 
 In order for an OP to release data to an RP according to the Personalized Access mechanism, it MUST establish a trust chain from the RP to the trust anchor and it MUST verify the Personalized Access RP trust mark. Both the establishment of the trust chain and the trust mark verification MUST be done according to the OpenID Federation specification. This check MUST be done periodically and MAY be done before each transaction.
 
 ###### 6.2.2 Implementing the Trustmark Issuence Criteria
 The client metadata requirements for recieving the Trustmark make use of the OpenID Connect Dynamic Client Registration specification [OpenID Connect Dynamic Client Registration]
-To be allagable for the Trustmark as described in Chapter 4 the Service should:
-*   (RC3.1)  The Service MUST provide an client_name, client_uri, and policy_uri in metadata. Including an English language version in accordance with the Metadata Languages and Scripts section 2.1 [Metadata Languages and Scripts] is RECOMMENDED.
+To be eligable for the Trustmark as described in Chapter 4:
+*   (RC3.1) The Service MUST provide an client_name, client_uri, and policy_uri in metadata. Including an English language version in accordance with the Metadata Languages and Scripts section 2.1 [Metadata Languages and Scripts] is RECOMMENDED.
 *   (RC3.2) The Service provides one or more contacts in metadata, using a contacts_detailed claim. The standard contacts claim as it is available in the specification makes it very hard to add specific detailed information on the type of contact and the prefered contact method. Hence this specification introduduces a new claim 'contacts_detailed' which provides a structered way to provide more detailed contact information. 
 ```
 "contacts": [
-   "technical": {"name": "Example.org Helpdesk", "email": "tech@example.org"},
-   "security": {"name": "Example.org CERT", "email": "cert@example.org"},
+   "helpdesk": {"name": "Example.org Helpdesk", "email": "tech@example.org"},
+   "technical": {"name": "devops@example.org", "email": "devops@example.org"},
+   "security": {"name": "CERT", "email": "cert@example.org"},
 ]
 ```
-
-` ToDo: This does not align well with the current best pratice in SAML to have a clear seperation of concerns (admin/technical/helpdesk/security) `
-
 
 ###### 6.2.3 Scope and claims
 
@@ -259,35 +252,62 @@ A Relying Parties that conforms to this entity label MUST exhibit the following 
   ],
   ...
 ```
-
-An example of a decoded Trust Mark payload issued to an RP, attesting to conformance to a national public service profile:
+An example of a decoded Trust Mark payload issued to an RP, attesting to conformance to the personalized access category:
 ```
 {
-  "id":"https://refeds.org/category/personalized/rp",
+  "id": "https://refeds.org/category/personalized/rp",
   "iss": "https://md.edugain.org/trustmarks",
   "sub": "https://rp.example.org/",
   "iat": 1579621160,
   "ref": "https://refeds.org/category/personalized"
 }
 ```
-
-
-
-
 Relying Parties SHOULD rely on using the personalized scope for requesting the bundle of claim defined in Section 5 and 6.2.3, but MAY ask for, or even require, other information as needed for additional purposes, via mechanisms that are outside the scope of this specification. A common example would be a requirement for indicating authorization to access a service (see Section 7).
 If individual claims are requested, e.g. by using the claims request paramater [Requesting Claims using the "claims" Request Parameter], and the OP is advertising the personalized Trustmark, the Relying Party may assume the semantics of the claims issued by the OP are consistent with section 6.2.3.
 
 ###### 6.2.5\. Deployment Guidance for OpenID Providers
 An OpenID Provider indicates conformance to this entity label by exhibiting the Trustmark in its metadata. Such an OpenID Provider MUST, for a significant subset of its user population, release all required claims in the bundle defined in Section 5 to all tagged Relying Parties, either automatically or subject to user consent or notification, ```without administrative involvement by any party.```
 
-An OpenID Provider that supports this entity label would exhibit the following entity attribute in SAML metadata:
+An OpenID Provider that supports this entity label would exhibit the following entity attribute in OpenID Federation  metadata:
+```
+{
+  "iss": "https://op.example.org/",
+  "sub": "https://op.example.org/",
+  "iat": 1516239022,
+  "exp": 1516298022,
+  "trust_marks": [
+    {
+     "id": "https://refeds.org/category/personalized/rp",
+     "trust_mark":
+       "eyJraWQiOiJmdWtDdUtTS3hwWWJjN09lZUk3Ynlya3N5a0E1bDhPb2RFSXVyOH
+        JoNFlBIiwidHlwIjoidHJ1c3QtbWFyaytqd3QiLCJhbGciOiJSUzI1NiJ9.eyJ
+        pc3MiOiJodHRwczovL3d3dy5hZ2lkLmdvdi5pdCIsInN1YiI6Imh0dHBzOi8vc
+        nAuZXhhbXBsZS5pdC9zcGlkIiwiaWF0IjoxNTc5NjIxMTYwLCJpZCI6Imh0dHB
+        zOi8vd3d3LnNwaWQuZ292Lml0L2NlcnRpZmljYXRpb24vcnAiLCJsb2dvX3Vya
+        SI6Imh0dHBzOi8vd3d3LmFnaWQuZ292Lml0L3RoZW1lcy9jdXN0b20vYWdpZC9
+        sb2dvLnN2ZyIsInJlZiI6Imh0dHBzOi8vZG9jcy5pdGFsaWEuaXQvZG9jcy9zc
+        GlkLWNpZS1vaWRjLWRvY3MvaXQvdmVyc2lvbmUtY29ycmVudGUvIn0.AGf5Y4M
+        oJt22rznH4i7Wqpb2EF2LzE6BFEkTzY1dCBMCK-8P_vj4Boz7335pUF45XXr2j
+        x5_waDRgDoS5vOO-wfc0NWb4Zb_T1RCwcryrzV0z3jJICePMPM_1hZnBZjTNQd
+        4EsFNvKmUo_teR2yzAZjguR2Rid30O5PO8kJtGaXDmz-rWaHbmfLhlNGJnqcp9
+        Lo1bhkU_4Cjpn2bdX7RN0JyfHVY5IJXwdxUMENxZd-VtA5QYiw7kPExT53XcJO
+        89ebe_ik4D0dl-vINwYhrIz2RPnqgA1OdbK7jg0vm8Tb3aemRLG7oLntHwqLO-
+        gGYr6evM2_SgqwA0lQ9mB9yhw"
+    }
+  ],
+  ...
 ```
 
+An example of a decoded Trust Mark payload self-issued by an OP, attesting to conformance to the personalized access category:
 ```
-
-
-
-
+{
+  "id": "https://refeds.org/category/personalized/op",
+  "iss": "https://op.example.org/",
+  "sub": "https://op.example.org/",
+  "iat": 1579621160,
+  "ref": "https://refeds.org/category/personalized"
+}
+```
 
 **7\. Authorization**
 ---------------------
