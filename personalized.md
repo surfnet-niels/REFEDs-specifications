@@ -342,5 +342,5 @@ A companion document discussing the federated authorization problem and suggeste
 
 \[[White Paper for implementation of mappings between SAML 2.0 and OpenID Connect in Research and Education](https://docs.google.com/document/d/1b-Mlet3Lq7qKLEf1BnHJ4nL1fq-vMe7fzpXyrq2wp08/edit#heading=h.c4ib3eojk7el)\], White Paper for implementation of mappings between SAML 2.0 and OpenID Connect in Research and Education (https://docs.google.com/document/d/1b-Mlet3Lq7qKLEf1BnHJ4nL1fq-vMe7fzpXyrq2wp08/edit#heading=h.c4ib3eojk7el)
 
-\[[Requesting Claims using the "claims" Request Parameter]  (https://openid.net/specs/openid-connect-core-1_0.html#ClaimsParameter)\], OpenID Connect Core 1.0 incorporating errata set 2, (https://openid.net/specs/openid-connect-core-1_0.html#ClaimsParameter)
+\[[Requesting Claims using the "claims" Request Parameter](https://openid.net/specs/openid-connect-core-1_0.html#ClaimsParameter)\], OpenID Connect Core 1.0 incorporating errata set 2, (https://openid.net/specs/openid-connect-core-1_0.html#ClaimsParameter)
 
