@@ -193,7 +193,7 @@ The identifier for the entity label for OPs:
     https://refeds.org/category/personalized/op
 
 ###### 6.2.2 Trustmark
-To signal compliance when using OIDC with OpenID Federation the label is to be used as a Trustmark [Trustmark]. This definition is written in compliance with the Trustmark specification as described in the OpenID Federation specification [OpenID Federation specification]; In OpenID Connect Relying Parties (RP) are the data consumers and OpenID Providers (OP) are the data providers.
+To signal compliance when using OIDC with OpenID Federation the label is to be used as a Trustmark \[Trustmark\]. This definition is written in compliance with the Trustmark specification as described in the OpenID Federation specification [OpenID Federation specification]; In OpenID Connect Relying Parties (RP) are the data consumers and OpenID Providers (OP) are the data providers.
 
 The Personalized Access Label has different semantics when it comes to OPs and RPS that are consuming identity information:
 - RPs can be holders of "Personalized Access RP" trust mark, which MUST NOT be self-asserted. The Trustmark MUST be issued by the federation registrar using the Trust Anchor. 
@@ -247,20 +247,7 @@ The following is an example of an entity configuration for an OpenID RP that sup
     {
      "id": "https://refeds.org/category/personalized/rp",
      "trust_mark":
-       "eyJraWQiOiJmdWtDdUtTS3hwWWJjN09lZUk3Ynlya3N5a0E1bDhPb2RFSXVyOH
-        JoNFlBIiwidHlwIjoidHJ1c3QtbWFyaytqd3QiLCJhbGciOiJSUzI1NiJ9.eyJ
-        pc3MiOiJodHRwczovL3d3dy5hZ2lkLmdvdi5pdCIsInN1YiI6Imh0dHBzOi8vc
-        nAuZXhhbXBsZS5pdC9zcGlkIiwiaWF0IjoxNTc5NjIxMTYwLCJpZCI6Imh0dHB
-        zOi8vd3d3LnNwaWQuZ292Lml0L2NlcnRpZmljYXRpb24vcnAiLCJsb2dvX3Vya
-        SI6Imh0dHBzOi8vd3d3LmFnaWQuZ292Lml0L3RoZW1lcy9jdXN0b20vYWdpZC9
-        sb2dvLnN2ZyIsInJlZiI6Imh0dHBzOi8vZG9jcy5pdGFsaWEuaXQvZG9jcy9zc
-        GlkLWNpZS1vaWRjLWRvY3MvaXQvdmVyc2lvbmUtY29ycmVudGUvIn0.AGf5Y4M
-        oJt22rznH4i7Wqpb2EF2LzE6BFEkTzY1dCBMCK-8P_vj4Boz7335pUF45XXr2j
-        x5_waDRgDoS5vOO-wfc0NWb4Zb_T1RCwcryrzV0z3jJICePMPM_1hZnBZjTNQd
-        4EsFNvKmUo_teR2yzAZjguR2Rid30O5PO8kJtGaXDmz-rWaHbmfLhlNGJnqcp9
-        Lo1bhkU_4Cjpn2bdX7RN0JyfHVY5IJXwdxUMENxZd-VtA5QYiw7kPExT53XcJO
-        89ebe_ik4D0dl-vINwYhrIz2RPnqgA1OdbK7jg0vm8Tb3aemRLG7oLntHwqLO-
-        gGYr6evM2_SgqwA0lQ9mB9yhw"
+       "eyJ0eXAiOiJ0cnVzdC1tYXJrK2p3dCIsImFsZyI6IkVTMjU2Iiwia2lkIjoiNTBlNzk1NzYwNTE5NGZkMzc3OTYwN2E1MDM1NjY0ZmIifQ.eyJpZCI6Imh0dHBzOi8vcmVmZWRzLm9yZy9jYXRlZ29yeS9wZXJzb25hbGl6ZWQvcnAiLCJpc3MiOiJodHRwczovL3RydXN0bWFya3MuZWR1Z2Fpbi5vcmcvIiwic3ViIjoiaHR0cHM6Ly9ycC5leGFtcGxlLm9yZy8iLCJpYXQiOjE1Nzk2MjExNjAsImV4cCI6MTUxNjI5ODAyMiwicmVmIjoiaHR0cHM6Ly9yZWZlZHMub3JnL2NhdGVnb3J5L3BlcnNvbmFsaXplZCJ9.1Aoba2cxWn75eM_J4Y3rOJ5U2TR5LeCl8T00CO1vhgb0XblaMbPefcvp7KOQDkQ1qnUTvjGYFEMo8yKuMSPLFQ"
     }
   ],
   ...
@@ -293,20 +280,7 @@ The following is an example of an entity configuration for an OpenID Provider th
     {
      "id": "https://refeds.org/category/personalized/op",
      "trust_mark":
-       "eyJraWQiOiJmdWtDdUtTS3hwWWJjN09lZUk3Ynlya3N5a0E1bDhPb2RFSXVyOH
-        JoNFlBIiwidHlwIjoidHJ1c3QtbWFyaytqd3QiLCJhbGciOiJSUzI1NiJ9.eyJ
-        pc3MiOiJodHRwczovL3d3dy5hZ2lkLmdvdi5pdCIsInN1YiI6Imh0dHBzOi8vc
-        nAuZXhhbXBsZS5pdC9zcGlkIiwiaWF0IjoxNTc5NjIxMTYwLCJpZCI6Imh0dHB
-        zOi8vd3d3LnNwaWQuZ292Lml0L2NlcnRpZmljYXRpb24vcnAiLCJsb2dvX3Vya
-        SI6Imh0dHBzOi8vd3d3LmFnaWQuZ292Lml0L3RoZW1lcy9jdXN0b20vYWdpZC9
-        sb2dvLnN2ZyIsInJlZiI6Imh0dHBzOi8vZG9jcy5pdGFsaWEuaXQvZG9jcy9zc
-        GlkLWNpZS1vaWRjLWRvY3MvaXQvdmVyc2lvbmUtY29ycmVudGUvIn0.AGf5Y4M
-        oJt22rznH4i7Wqpb2EF2LzE6BFEkTzY1dCBMCK-8P_vj4Boz7335pUF45XXr2j
-        x5_waDRgDoS5vOO-wfc0NWb4Zb_T1RCwcryrzV0z3jJICePMPM_1hZnBZjTNQd
-        4EsFNvKmUo_teR2yzAZjguR2Rid30O5PO8kJtGaXDmz-rWaHbmfLhlNGJnqcp9
-        Lo1bhkU_4Cjpn2bdX7RN0JyfHVY5IJXwdxUMENxZd-VtA5QYiw7kPExT53XcJO
-        89ebe_ik4D0dl-vINwYhrIz2RPnqgA1OdbK7jg0vm8Tb3aemRLG7oLntHwqLO-
-        gGYr6evM2_SgqwA0lQ9mB9yhw"
+       "eyJ0eXAiOiJ0cnVzdC1tYXJrK2p3dCIsImFsZyI6IkVTMjU2Iiwia2lkIjoiNTBlNzk1NzYwNTE5NGZkMzc3OTYwN2E1MDM1NjY0ZmIifQ.eyJpZCI6Imh0dHBzOi8vcmVmZWRzLm9yZy9jYXRlZ29yeS9wZXJzb25hbGl6ZWQvb3AiLCJpc3MiOiJodHRwczovL29wLmV4YW1wbGUub3JnLyIsInN1YiI6Imh0dHBzOi8vb3AuZXhhbXBsZS5vcmcvIiwiaWF0IjoxNTc5NjIxMTYwLCJyZWYiOiJodHRwczovL3JlZmVkcy5vcmcvY2F0ZWdvcnkvcGVyc29uYWxpemVkIn0.xa72K6_XyPFPZ_5ePEkQGyol-YgwIHh5vd88_YfPsIdSZ_zdXbAtOKV6L_7p7Jfc1cxB2A7zkvYRehiLfjfW7g"
     }
   ],
   ...
@@ -356,17 +330,17 @@ A companion document discussing the federated authorization problem and suggeste
 
 \[[SCHAC](https://wiki.refeds.org/display/STAN/SCHAC)\] REFEDS, “Schema for ACademia,” [https://refeds.org/specifications/schac](https://refeds.org/specifications/schac)[.](https://wiki.refeds.org/display/STAN/SCHAC)
 
-\[Trustmark](https://openid.net/specs/openid-federation-1_0.html#name-trust-marks) Trustmarks, OpenID Federation 1.0,[https://openid.net/specs/openid-federation-1_0.html#name-trust-marks] (https://openid.net/specs/openid-federation-1_0.html#name-trust-marks)
+\[[Trustmark](https://openid.net/specs/openid-federation-1_0.html#name-trust-marks)\] Trustmarks, OpenID Federation 1.0,[https://openid.net/specs/openid-federation-1_0.html#name-trust-marks] (https://openid.net/specs/openid-federation-1_0.html#name-trust-marks)
 
-\[OpenID Federation specification](https://openid.net/specs/openid-federation-1_0.htm), OpenID Federation 1.0, [https://openid.net/specs/openid-federation-1_0.htm](https://openid.net/specs/openid-federation-1_0.htm)
+\[[OpenID Federation specification](https://openid.net/specs/openid-federation-1_0.htm)\], OpenID Federation 1.0, [https://openid.net/specs/openid-federation-1_0.htm](https://openid.net/specs/openid-federation-1_0.htm)
 
-\[OpenID Connect Dynamic Client Registration](https://openid.net/specs/openid-connect-registration-1_0.html), OpenID Connect Dynamic Client Registration, [https://openid.net/specs/openid-connect-registration-1_0.html](https://openid.net/specs/openid-connect-registration-1_0.html)
+\[[OpenID Connect Dynamic Client Registration](https://openid.net/specs/openid-connect-registration-1_0.html)\], OpenID Connect Dynamic Client Registration, [https://openid.net/specs/openid-connect-registration-1_0.html](https://openid.net/specs/openid-connect-registration-1_0.html)
 
-\[Metadata Languages and Scripts](https://openid.net/specs/openid-connect-registration-1_0.html#LanguagesAndScripts), Metadata Languages and Scripts, OpenID Connect Dynamic Client Registration, Section 2.1, [https://openid.net/specs/openid-connect-registration-1_0.html#LanguagesAndScripts](https://openid.net/specs/openid-connect-registration-1_0.html#LanguagesAndScripts)
+\[[Metadata Languages and Scripts](https://openid.net/specs/openid-connect-registration-1_0.html#LanguagesAndScripts)\], Metadata Languages and Scripts, OpenID Connect Dynamic Client Registration, Section 2.1, [https://openid.net/specs/openid-connect-registration-1_0.html#LanguagesAndScripts](https://openid.net/specs/openid-connect-registration-1_0.html#LanguagesAndScripts)
 
-\[Requesting Claims using Scope Values] OpenID Connect Core 1.0 incorporating errata set 2 [https://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims]
+\[[Requesting Claims using Scope Values](https://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims)\], OpenID Connect Core 1.0 incorporating errata set 2 [https://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims](https://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims)
 
-\[White Paper for implementation of mappings between SAML 2.0 and OpenID Connect in Research and Education][https://docs.google.com/document/d/1b-Mlet3Lq7qKLEf1BnHJ4nL1fq-vMe7fzpXyrq2wp08/edit#heading=h.c4ib3eojk7el]
+\[[White Paper for implementation of mappings between SAML 2.0 and OpenID Connect in Research and Education](https://docs.google.com/document/d/1b-Mlet3Lq7qKLEf1BnHJ4nL1fq-vMe7fzpXyrq2wp08/edit#heading=h.c4ib3eojk7el)\]
 
 \[Requesting Claims using the "claims" Request Parameter] OpenID Connect Core 1.0 incorporating errata set 2 [https://openid.net/specs/openid-connect-core-1_0.html#ClaimsParameter]
 
